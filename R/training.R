@@ -184,16 +184,17 @@ VAE_train = function(data,encoder_info, decoder_info,Lip_en, pi_enc=1,lip_dec, p
 #' @seealso [VAE_train()], [set_feat_dist()]
 #' @export
 reset_seeds <- function(spec_seed) {
-  tf = tensorflow::tf
-  # Reset TensorFlow/Keras session and clear the graph
-  tf$compat$v1$reset_default_graph()
-  keras::k_clear_session()  # clears the Keras session
-  # Set R random seed
-  set.seed(spec_seed)  # seed value is an input option
-  # Set TensorFlow random seed
-  tf$random$set_seed(spec_seed)
-  # Import and set Python's random seed (via reticulate)
-  py_random <- reticulate::import("random")  # Import Python's random module
-  py_random$seed(spec_seed)  # Set Python's random seed
-  message("Random seeds reset\n")
+  spec_seed <- as.integer(spec_seed)
+  tf <- tensorflow::tf
+  #reset state
+  keras::k_clear_session()
+  #TensorFlow (upadated to set random)
+  tf$keras$utils$set_random_seed(spec_seed)
+  #R
+  set.seed(spec_seed)
+  #Python random
+  py_random <- reticulate::import("random", delay_load = TRUE)
+  py_random$seed(spec_seed)
+
+  message("Random seeds reset \n")
 }

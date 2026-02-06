@@ -1,4 +1,4 @@
-84393ceb6c5b2e8bd6005febd83a2ecb *DESCRIPTION
+674ce878bffa3a37d5738edccca8ce24 *DESCRIPTION
 68366f1da0e8c6d22a8a5f9766df8650 *LICENSE
 3e4d774e8638621a6a544f0348362777 *NAMESPACE
 03e1b1d88e9c43ba4c5db8bc64db28c0 *R/Encoder_Decoder_Info.R
@@ -6,17 +6,17 @@
 9b9530d23b06ff89770a0692f08f30be *R/SamplingVAE.R
 b6c78ffda4189ddf9cb688ec33a314d1 *R/decoder.R
 1b9baa20fd154fbac4746540f9c23e04 *R/encoder.R
-eee09246190f821539154180e4aa3282 *R/extracting_distribution.R
+fe12f3614c1e234fea2efb53871a03b4 *R/extracting_distribution.R
 ce9aa8f1f73b5386f8813e4d34cdae6d *R/feat_dist_storinginternally.R
 cfb39a1774a8dddfa178ffa1919162f0 *R/latent_sampling.R
 ac208ff4df01ab11cec49701cd12008c *R/loss.R
 667bd20dec32656315e57d65224173d1 *R/model.R
 b79c237992b4be4977e0beb77e769c57 *R/priors.R
 0c372239eeea6208412cea7dc1e28dec *R/reticulate.R
-c1e87f53b476a4f8c78c7899774cd079 *R/training.R
+a5a13e69c0f11032332b2f5a4dad5043 *R/training.R
 2666f27e1c844568a1692eeb93e7c63f *R/utils-globals.R
 271937741f2c00028fd22c52fce7da53 *R/zzz.R
-f7b44cb3f894d22ec768b043bdfb2c4a *README.md
+cc504f559725f3579f293404d6095464 *README.md
 a099cf1caaeff26015a615e99f84bc4a *man/Decoder_weights.Rd
 9fefafd024455a37bff2b30ad0fe62c4 *man/Encoder_weights.Rd
 3126071a58780a61b331fd4191bc3017 *man/Latent_sample.Rd
@@ -25,7 +25,7 @@ a099cf1caaeff26015a615e99f84bc4a *man/Decoder_weights.Rd
 4ff6eef346cb66685a6e1395986325e1 *man/encoder_decoder_information.Rd
 80dae78f2d9d7a6667a827814179ac10 *man/encoder_latent.Rd
 36fbfcf382c7c994ebc1c3c532fb693b *man/extracting_distribution.Rd
-254316b78e9fe9004a18abcf9fc85b3f *man/feat_reorder.Rd
+367c4f0d2ff4fa11801c3896097ea43f *man/feat_reorder.Rd
 eca0f7a14acaff04f02d5f69a4677083 *man/get_feat_dist.Rd
 fb6e77937be76983e53fcf03f1762d0c *man/get_tfa.Rd
 cb7b791deb57da13899b69af4b8d8854 *man/min_max_scale.Rd

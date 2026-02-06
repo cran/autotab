@@ -105,7 +105,7 @@ extracting_distribution = function(data){
 #' variable name.
 #'
 #' @param feat_dist Data frame from [extracting_distribution()].
-#' @param data Data frame of the **original (preprocessed)** variables.
+#' @param data Data frame of the **original (not preprocessed)** variables.
 #' @return The input `feat_dist`, reordered to align with `data`.
 #'
 #' @examples

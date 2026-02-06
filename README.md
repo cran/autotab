@@ -27,11 +27,11 @@ Other versions may work, but compatibility is not guaranteed.
 
 AutoTab was developed under Python 3.10.8 and numpy 1.26.4. If
 compatibility issues arise, we recommend using the tested configuration
-shown above.
+described above.
 
 ``` r
-# Install from GitHub
-remotes::install_github("SarahMilligan-hub/AutoTab")
+# Install on CRAN
+install.packages("autotab")
 
 # Load the package
 library(autoTab)
@@ -246,11 +246,6 @@ TensorFlow.
 
 If you use AutoTab in your research, please cite:
 
-Milligan, S. (2025). AutoTab: Variational Autoencoders for Heterogeneous
-Tabular Data. GitHub version 0.1.1 URL:
-<https://github.com/SarahMilligan-hub/AutoTab>
-
-Once the package is on CRAN, please update the citation to:
-
-Milligan, S. (2025). AutoTab: Variational Autoencoders for Heterogeneous
-Tabular Data. R package version 0.1.1
+Milligan S (2025). autotab: Variational Autoencoders for Heterogeneous
+Tabular Data. R package version 0.1.1.
+<doi:10.32614/CRAN.package.autotab>.

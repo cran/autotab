@@ -1,6 +1,6 @@
 Package: autotab
 Title: Variational Autoencoders for Heterogeneous Tabular Data
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person("Sarah", "Milligan", email = "slm1999@bu.edu", role = c("aut", "cre"))
 Description: Build and train a variational autoencoder (VAE) for mixed-type
@@ -19,8 +19,8 @@ Suggests: caret
 SystemRequirements: Python (>= 3.8); TensorFlow (>= 2.10); Keras;
         TensorFlow Addons
 NeedsCompilation: no
-Packaged: 2025-11-20 04:25:56 UTC; smill
+Packaged: 2026-02-06 19:07:47 UTC; smill
 Author: Sarah Milligan [aut, cre]
 Maintainer: Sarah Milligan <slm1999@bu.edu>
 Repository: CRAN
-Date/Publication: 2025-11-24 17:40:08 UTC
+Date/Publication: 2026-02-06 19:40:08 UTC
