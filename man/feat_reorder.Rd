@@ -9,7 +9,7 @@ feat_reorder(feat_dist, data)
 \arguments{
 \item{feat_dist}{Data frame from \code{\link[=extracting_distribution]{extracting_distribution()}}.}
 
-\item{data}{Data frame of the \strong{original (not preprocessed)} variables.}
+\item{data}{Data frame of the \strong{original (preprocessed)} variables.}
 }
 \value{
 The input \code{feat_dist}, reordered to align with \code{data}.

@@ -7,7 +7,7 @@
 extracting_distribution(data)
 }
 \arguments{
-\item{data}{Data frame of the \strong{original (preprocessed)} variables.}
+\item{data}{Data frame of the \strong{original (not preprocessed)} variables.}
 }
 \value{
 A data frame with columns \code{column_name}, \code{distribution}, and \code{num_params}. Note: refer to \code{\link[=feat_reorder]{feat_reorder()}}.

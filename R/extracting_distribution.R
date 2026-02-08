@@ -42,7 +42,7 @@
 #' ensuring that the reconstruction loss and sampling functions correctly handle
 #' each distributional head.
 #'
-#' @param data Data frame of the **original (preprocessed)** variables.
+#' @param data Data frame of the **original (not preprocessed)** variables.
 #' @return A data frame with columns `column_name`, `distribution`, and `num_params`. Note: refer to [feat_reorder()].
 #'
 #' @examples
@@ -105,7 +105,7 @@ extracting_distribution = function(data){
 #' variable name.
 #'
 #' @param feat_dist Data frame from [extracting_distribution()].
-#' @param data Data frame of the **original (not preprocessed)** variables.
+#' @param data Data frame of the **original (preprocessed)** variables.
 #' @return The input `feat_dist`, reordered to align with `data`.
 #'
 #' @examples
