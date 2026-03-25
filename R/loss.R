@@ -4,7 +4,7 @@
 #############################
 #' @keywords internal
 lossbasedondist = function(input, feat_dist, target,weighted=0, recon_weights){ #here the "input" data set contains the output of the VAE, target is the real data (dummy coded)
-  tf = tensorflow::tf
+   tf = tensorflow::tf
 
   index_x = 0L #start at zero just as we did when defining the activation functions since tensors start at 0
   index_y = 0L
@@ -67,32 +67,78 @@ lossbasedondist = function(input, feat_dist, target,weighted=0, recon_weights){ 
       stop("Unknown:", distribution)  #A measure to catch errors
     }}
 
-  #Get rid of nulls so we do not have nulls when the indiex was not of that type
-  cont_loss_LL <- cont_loss_LL[!sapply(cont_loss_LL, is.null)]
-  bin_loss_LL  <- bin_loss_LL[!sapply(bin_loss_LL,  is.null)]
-  cat_loss_LL  <- cat_loss_LL[!sapply(cat_loss_LL,  is.null)]
+  has_cont <- any(feat_dist$distribution == "gaussian")
+  has_bin  <- any(feat_dist$distribution == "bernoulli")
+  has_cat  <- any(feat_dist$distribution == "categorical")
 
-  cont_group_loss <- tf$reduce_mean(tf$stack(cont_loss_LL, axis = 0L),axis = 0L  )
-  bin_group_loss  <- tf$reduce_mean(tf$stack(bin_loss_LL,  axis = 0L),axis = 0L  )
-  cat_group_loss  <- tf$reduce_mean(tf$stack(cat_loss_LL,  axis = 0L),  axis = 0L )
+  #Get rid of nulls so we do not have nulls when the indiex was not of that type
+  #Do this conditionally on there being a binary, continuous, or categorical
+  if (has_cont){
+    cont_loss_LL <- cont_loss_LL[!sapply(cont_loss_LL, is.null)]}
+  if (has_bin){
+    bin_loss_LL  <- bin_loss_LL[!sapply(bin_loss_LL,  is.null)]}
+  if (has_cat){
+    cat_loss_LL  <- cat_loss_LL[!sapply(cat_loss_LL,  is.null)]}
+
+  if (has_cont){
+    cont_group_loss <- tf$reduce_mean(tf$stack(cont_loss_LL, axis = 0L),axis = 0L  )}
+  if (has_bin){
+    bin_group_loss  <- tf$reduce_mean(tf$stack(bin_loss_LL,  axis = 0L),axis = 0L  )}
+  if (has_cat){
+    cat_group_loss  <- tf$reduce_mean(tf$stack(cat_loss_LL,  axis = 0L),  axis = 0L )}
 
   if (weighted == 0) {
-    w_cont <- tf$constant(1.0, dtype = cont_group_loss$dtype)
-    w_bin  <- tf$constant(1.0, dtype = bin_group_loss$dtype)
-    w_cat  <- tf$constant(1.0, dtype = cat_group_loss$dtype)
+    if (has_cont){
+      w_cont <- tf$constant(1.0, dtype = cont_group_loss$dtype)}
+    if (has_bin){
+      w_bin  <- tf$constant(1.0, dtype = bin_group_loss$dtype)}
+    if (has_cat){
+      w_cat  <- tf$constant(1.0, dtype = cat_group_loss$dtype)}
   }
   else if (weighted == 1) {
-    w_cont <-  tf$constant(recon_weights[[1]], dtype = cont_group_loss$dtype)
-    w_bin  <-  tf$constant(recon_weights[[2]], dtype = bin_group_loss$dtype)
-    w_cat  <-  tf$constant(recon_weights[[3]], dtype = cat_group_loss$dtype)}
+    if (has_cont){
+      w_cont <-  tf$constant(recon_weights[[1]], dtype = cont_group_loss$dtype)}
+    if (has_bin){
+      w_bin  <-  tf$constant(recon_weights[[2]], dtype = bin_group_loss$dtype)}
+    if (has_cat){
+      w_cat  <-  tf$constant(recon_weights[[3]], dtype = cat_group_loss$dtype)}}
 
-  group_losses <- tf$stack(list(cont_group_loss, bin_group_loss, cat_group_loss),  axis = 0L )
+  #build a grouping of the losses
+  group_loss_list <- list()
+  group_weight_list <- list()
 
-  group_weights <- tf$stack(list(w_cont, w_bin,  w_cat),axis = 0L)
+  if (has_cont) {
+    group_loss_list <- c(group_loss_list, list(cont_group_loss))
+    group_weight_list <- c(group_weight_list, list(w_cont))
+  }
+  if (has_bin) {
+    group_loss_list <- c(group_loss_list, list(bin_group_loss))
+    group_weight_list <- c(group_weight_list, list(w_bin))
+  }
+  if (has_cat) {
+    group_loss_list <- c(group_loss_list, list(cat_group_loss))
+    group_weight_list <- c(group_weight_list, list(w_cat))
+  }
+
+  group_losses  <- tf$stack(group_loss_list, axis = 0L)
+  group_weights <- tf$stack(group_weight_list, axis = 0L)
 
   weighted_groups   <- tf$multiply(group_weights, group_losses)
   total_loss        <- tf$reduce_sum(weighted_groups, axis = 0L)
 
   message(paste("Loss - total", total_loss))
-  return(list(total_loss,cont_group_loss,bin_group_loss,cat_group_loss) )  }
+
+  return_list <- list(total_loss)
+
+  if (has_cont) {
+    return_list <- c(return_list, list(cont_group_loss))
+  }
+  if (has_bin) {
+    return_list <- c(return_list, list(bin_group_loss))
+  }
+  if (has_cat) {
+    return_list <- c(return_list, list(cat_group_loss))
+  }
+
+  return(return_list) }
 

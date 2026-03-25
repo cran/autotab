@@ -138,9 +138,9 @@ VAE_train = function(data,encoder_info, decoder_info,Lip_en, pi_enc=1,lip_dec, p
   loss_history <-list()
   loss_tracked = keras::callback_lambda(on_epoch_end = function(epoch,logs){
     loss_history[[epoch+1]] <<- logs$loss
- })
+  })
 
-  if (seperate == 1){callbacks = c(list(EarlyStop, loss_tracked),beta_callback_list,temp_callback_list,LossPrinterCallback$new())}
+  if (seperate == 1){callbacks = c(list(EarlyStop, loss_tracked),beta_callback_list,temp_callback_list)}
   else if (seperate == 0) { callbacks = c(list(EarlyStop, loss_tracked),beta_callback_list,temp_callback_list)}
 
   input_data <- as.matrix(data)
@@ -149,6 +149,7 @@ VAE_train = function(data,encoder_info, decoder_info,Lip_en, pi_enc=1,lip_dec, p
 
   return(list(trained_model = run_vae, loss_history = loss_history))
 }
+
 
 
 #' Reset all random seeds across R, TensorFlow, and Python
